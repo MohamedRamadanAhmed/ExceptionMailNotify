@@ -38,7 +38,7 @@ public class AnnotationLogic {
 
 		for (Object object : all) {
 			Class<?> clazz = object.getClass();
-			// System.out.println("All classes : " + clazz.getName());
+			 System.out.println("All classes : " + clazz.getName());
 
 			if (clazz.isAnnotationPresent(ExceptionMailSender.class)) {
 //	    		for (Method method : clazz.getMethods()) {
