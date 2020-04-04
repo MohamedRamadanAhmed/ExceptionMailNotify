@@ -33,8 +33,9 @@ public class EmailServiceImpl implements EmailService {
 		
 	}
 	@Override
-	public void anyFunction() {
+	public Integer anyFunction() {
 		System.out.println("anyFunction()");
+		return 5 ;
 	}
 
 }

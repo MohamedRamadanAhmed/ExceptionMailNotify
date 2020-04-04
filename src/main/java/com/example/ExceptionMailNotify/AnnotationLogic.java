@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.aop.Advisor;
+import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class AnnotationLogic {
 	SimplePoinCut pointcut;
 	@Autowired
 	MySimpleAdvice advice;
+	@Autowired
+	AnnotationAwareAspectJAutoProxyCreator a;
+//	@Autowired
+//	ExceptionMailSenderAspect aspect;
 	
 	public void handleAnnotation() throws Exception {
 		int i = 0;
@@ -48,11 +53,18 @@ public class AnnotationLogic {
 //	    	            
 //	    	        i++;
 //	    	    }	
+				
 				Advisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
 				ProxyFactory pf = new ProxyFactory();
+				pf.setTarget(object);
 				pf.setTargetClass(clazz);
 				pf.addAdvisor(advisor);
 				Class<?> c = pf.getTargetClass();
+				EmailServiceImpl EmailServiceImpl = (com.example.ExceptionMailNotify.EmailServiceImpl) pf.getProxy();
+				EmailServiceImpl.anyFunction();
+				EmailServiceImpl ss = (EmailServiceImpl) c.cast(new EmailServiceImpl());
+				ss.anyFunction();
+				
 				BeanDefinitionRegistry factory = 
 						   (BeanDefinitionRegistry) context.getAutowireCapableBeanFactory();
 				char chrs[] = clazz.getSimpleName().toCharArray();

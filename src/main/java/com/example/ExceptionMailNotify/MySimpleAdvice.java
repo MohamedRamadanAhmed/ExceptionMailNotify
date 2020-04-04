@@ -16,14 +16,20 @@ public class MySimpleAdvice implements MethodInterceptor {
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
-		String name=invocation.getMethod().getName()+"("+invocation.getArguments()[0]+")";
+		String name=invocation.getMethod().getName()+"()";
 		System.out.println("Invoking method "+name);
         
+		 Object val = null ; 
+		 System.out.println(invocation);
         // call the method
-       Object val=invocation.proceed();
+		if(invocation != null) {
+		        val=invocation.proceed();
+
+		}
         
         // print method is invoked
         System.out.println("Method is invoked.");
+        System.out.println(val);
 		return val;
 	}
 

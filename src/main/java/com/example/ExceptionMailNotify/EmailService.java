@@ -10,5 +10,5 @@ package com.example.ExceptionMailNotify;
 
 public interface EmailService {
 	public void sendSimpleMessage(String to, String subject, String text);
-	public void anyFunction();
+	public Integer anyFunction();
 }
